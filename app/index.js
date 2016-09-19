@@ -87,5 +87,5 @@ module.exports = generators.Base.extend({
       {local: require.resolve(`generator-${name}/generators/app`)}
     ));
   },
-  installing() {
+  installing() {this.npmInstall()},
 });

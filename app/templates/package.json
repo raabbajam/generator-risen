@@ -2,24 +2,20 @@
   "name": "<%= moduleName %>",
   "version": "1.0.0",
   "description": "<%= moduleDesc %>",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "files": [
     "bin/",
-    "dist/"
+    "src/"
   ],
   "scripts": {
-    "clean": "rimraf dist",
     "lint": "eslint src test",
     "check": "npm run lint -s && dependency-check package.json --entry src",
-    "watch": "watch 'npm run build' src test",
-    "test": "babel-node test/index.js | tspec",
-    "prebuild": "npm run check -s && npm run clean -s",
-    "build": "babel --optional runtime src -d dist",
-    "postbuild": "npm run test -s",
-    "coverage": "babel-node node_modules/isparta/bin/isparta cover test/index.js",
+    "watch": "watch 'npm run test' src test",
+    "test": "node test | tspec",
+    "prepublish": "npm run check -s && npm run test -s",
+    "coverage": "isparta cover test",
     "coveralls": "npm run coverage -s && coveralls < coverage/lcov.info",
     "postcoveralls": "rimraf ./coverage",
-    "prepublish": "npm run build -s",
     "deploy": "git pull --rebase origin master && git push origin master",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
@@ -43,7 +39,6 @@
   "homepage": "https://github.com/<%= githubUsername %>/<%= moduleName %>#readme",
   "devDependencies": {
     "eslint": "^1.10.1",
-    "babel-eslint": "^4.1.6",
     "coveralls": "^2.11.4",
     "isparta": "^4.0.0",
     "tape": "^4.2.2",

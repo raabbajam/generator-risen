@@ -1,7 +1,7 @@
-import test from "tape"
-import <%= camelModuleName %> from "../src"
+const test = require('tape');
+const <%= camelModuleName %> = require('../src');
 
-test("<%= camelModuleName %>", (t) => {
-  t.plan(1)
-  t.equal(true, <%= camelModuleName %>(), "return true")
-})
+test('<%= camelModuleName %>', (assert) => {
+  assert.plan(1);
+  assert.equal(true, <%= camelModuleName %>(), 'return true');
+});
